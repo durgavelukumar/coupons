@@ -11,11 +11,12 @@
 |
 */
 
-/*
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome to coupons project');
 });
 
+/*
 Route::get('/', 'LoremController@getHomePage');
 
 Route::get('/lorem', 'LoremController@getLoremPage');

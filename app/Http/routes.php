@@ -11,6 +11,74 @@
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/', 'LoremController@getHomePage');
+
+Route::get('/lorem', 'LoremController@getLoremPage');
+Route::post('/lorem', 'LoremController@postLoremPage');
+
+Route::get('/userGen', 'UserGenController@getUserGenPage');
+Route::post('/userGen', 'UserGenController@postUserGenPage');
+*/
+
+
+
+Route::get('/coupons', 'CouponController@index');
+
+Route::get('/coupons/create', 'CouponController@create');
+
+Route::post('/coupons', 'CouponController@store');
+
+Route::get('/coupons/{coupon_id}', 'CouponController@show');
+
+Route::get('/coupons/{coupon_id}/edit', 'CouponController@edit');
+
+Route::put('/coupons/{coupon_id}', 'CouponController@update');
+
+Route::delete('/coupons/{coupon_id}', 'CouponController@destroy');
+
+
+Route::get('/coupon1', function() {
+	echo 'This is the coupon index!';
+});
+
+/*  This is to test connection to the database
+Route::get('/debug', function() {
+
+    echo '<pre>';
+
+    echo '<h1>Environment</h1>';
+    echo App::environment().'</h1>';
+
+    echo '<h1>Debugging?</h1>';
+    if(config('app.debug')) echo "Yes"; else echo "No";
+
+    echo '<h1>Database Config</h1>';
+    /*
+    The following line will output your MySQL credentials.
+    Uncomment it only if you're having a hard time connecting to the database and you
+    need to confirm your credentials.
+    When you're done debugging, comment it back out so you don't accidentally leave it
+    running on your live server, making your credentials public.
+    */
+    //print_r(config('database.connections.mysql'));
+/*
+    echo '<h1>Test Database Connection</h1>';
+    try {
+        $results = DB::select('SHOW DATABASES;');
+        echo '<strong style="background-color:green; padding:5px;">Connection confirmed</strong>';
+        echo "<br><br>Your Databases:<br><br>";
+        print_r($results);
+    }
+    catch (Exception $e) {
+        echo '<strong style="background-color:crimson; padding:5px;">Caught exception: ', $e->getMessage(), "</strong>\n";
+    }
+
+    echo '</pre>';
+
+});
+*/

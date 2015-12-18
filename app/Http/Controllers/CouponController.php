@@ -89,6 +89,7 @@ class CouponController extends Controller
 		\Session::flash('flash_message','Your coupon was added');
 		return redirect('/coupons');
 
+	}
     /**
      * Show the form for editing the specified resource.
      *

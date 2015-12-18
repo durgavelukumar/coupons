@@ -15,7 +15,7 @@ class CouponUserTableSeeder extends Seeder
 		# First, create an array of all the books we want to associate tags with
     # The *key* will be the book title, and the *value* will be an array of tags.
     $coupons =[
-        '1' => ['jill@harvard.edu','jamal@harvard.edu'],
+        '1' => ['jill@harvard.edu'],
         '2' => ['jill@harvard.edu'],
         '3' => ['jamal@harvard.edu'],
 		'4' => ['jamal@harvard.edu']

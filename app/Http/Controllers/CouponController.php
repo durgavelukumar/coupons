@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use DB;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -28,26 +29,11 @@ class CouponController extends Controller
      */
     public function getIndex()
     {
-        //
-		//$coupons = \App\Coupon::all();
+
+		$loginUser = \Auth::id();
+		$coupons = DB::select( DB::raw("SELECT a.id, a.name_of_store, a.description, a.date_valid_from, a.time_valid_from, a.date_valid_until, a.time_valid_until  FROM coupons as a, coupon_user as b WHERE  b.coupon_id = a.id AND b.user_id = '$loginUser'") );
+
 		
-		$coupons = \App\Coupon::where('user_id','=',\Auth::id())->get();
-		
-		//$coupons = \App\Coupon::where('user_id','=',\Auth::user()->id)->get();
-	
-//	$coupon = User::with('coupons')->where('user_id','=',\Auth::id())->get();
-//$item = User::with('items')->get()->find(1)->items->find(2)->pivot->equipable;
-	//	$coupons = \App\Coupon::where('user_id','=',\Auth::id())->get();
-		
-		//$couponusers = \App\Couponuser::where('user_id','=',\Auth::id());
-		//$coupons = \App\Coupon::where('id','=',$couponuser->coupon_id)->get();
-		
-		// foreach($couponusers as $couponuser) {
-         //   $coupon = \App\Coupon::where('id','=',$couponuser->coupon_id)->first();
-		
-	//    $coupon = \App\Coupon::with('user')->find(\Auth::id());
-	//	$coupons = \App\Coupon::where('user_id','=',\Auth::id())->orderBy('id','DESC')->get();
-	//	$coupons = \App\Coupon::where('user_id','=',\Auth::id())->orderBy('created_at', 'DESC')->get();
 		return view('pages.index')->with('coupons',$coupons);
     }
 
@@ -94,33 +80,14 @@ class CouponController extends Controller
 		$coupon->time_valid_until = $request->time_valid_until;
 		$coupon->save();
 		
+		$user = \App\User::where('id','=',\Auth::id())->first();
+
+            
+            $coupon->users()->save($user);
+		
+		
 		\Session::flash('flash_message','Your coupon was added');
 		return redirect('/coupons');
-	}
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-		return "This is store method.";
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-		return "This is show method.";
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -184,28 +151,4 @@ class CouponController extends Controller
 		
 	}
 	
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-		return "This is update method.";
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-		return "This is destroy method.";
-    }
 }

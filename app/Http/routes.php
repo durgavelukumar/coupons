@@ -13,7 +13,6 @@
 
 
 Route::group(['middleware' => 'auth'], function () {
-//Route::get('/', 'CouponController@display');
 
 Route::get('/', 'CouponController@getIndex');
 
@@ -31,7 +30,6 @@ Route::get('/coupons/delete/{id?}', 'CouponController@getDoDelete');
 
 //User Authentication
 # Show login form
-//Route::get('/login', 'Auth\AuthController@getLogin');
 Route::get('/login', 'Auth\AuthController@getLogin');
 
 # Process login form
